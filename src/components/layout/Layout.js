@@ -26,8 +26,8 @@ export const Layout = () => {
     <Wrapper>
       {/* <GlobalStyle /> */}
       <Nav>
-        <Link to="/">Home</Link>
-        <Link to="/Movies">Movies</Link>
+        <Link to="/home">Home</Link>
+        <Link to="/movies">Movies</Link>
       </Nav>
       <Outlet />
       {/* <Toaster /> */}

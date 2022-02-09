@@ -7,8 +7,9 @@ export const getTrendMovies = async () => {
   console.log(response.data);
   return response.data;
 };
-const movies = getTrendMovies().then(data => console.log(data.results));
-console.log(movies);
+
+// console.log(getTrendMovies().then(data => console.log(data.results)));
+
 // export const getPublicationById = async id => {
 //   const response = await axios.get(`/publications/${id}`);
 //   return response.data;
