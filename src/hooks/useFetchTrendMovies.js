@@ -23,4 +23,4 @@
 //   console.log(trendMovies);
 //   return { trendMovies, loading, error };
 // };
-// getTrendMovies().then(data => console.log(data.results));
+// // getTrendMovies().then(data => console.log(data.results));
