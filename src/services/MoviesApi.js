@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL =
-//   'https://api.themoviedb.org/3/movie/550?api_key=e815f38922cafca80c1f07403a692f09';
 export const getTrendMovies = async () => {
   const response = await axios.get(
     'https://api.themoviedb.org/3/trending/all/day?api_key=e815f38922cafca80c1f07403a692f09'
@@ -9,8 +7,8 @@ export const getTrendMovies = async () => {
   console.log(response.data);
   return response.data;
 };
-getTrendMovies().then(data => console.log(data.results));
-
+const movies = getTrendMovies().then(data => console.log(data.results));
+console.log(movies);
 // export const getPublicationById = async id => {
 //   const response = await axios.get(`/publications/${id}`);
 //   return response.data;
