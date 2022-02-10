@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-// import { Layout } from '../components/layout/Layout';
+import { Layout } from '../components/layout/Layout';
 // import { lazy, Suspense } from 'react';
-// import MoviesListTitle from '../pages/MoviesListTitle';
-// import { Outlet, Link } from 'react-router-dom';
+import MoviesListTitle from '../pages/MoviesListTitle';
+
+import { Outlet, Link } from 'react-router-dom';
+
 export const App = () => {
   axios.defaults.baseURL = 'https://api.themoviedb.org/3';
   const API_KEY = 'e815f38922cafca80c1f07403a692f09';
@@ -18,7 +20,7 @@ export const App = () => {
   };
   const useFetchTrendMovies = () => {
     useEffect(() => {
-      // if (trendMovies.lengs !== 0) return;
+      // if (trendMovies === '') return;
       async function fetchTrendMovies() {
         setError(error);
         setLoading(true);
@@ -43,25 +45,30 @@ export const App = () => {
     <>
       <main>
         <h1>Trend movies</h1>
-        <ul>
-          {trendMovies.map(trendMovie => (
-            <li key={trendMovie.id}>{trendMovie.original_title} </li>
-          ))}
-        </ul>
+        <>
+          {loading}
+          {!error && (
+            <ul>
+              {trendMovies.map(({ id, original_title }) => (
+                <Link key={id} to={`/${id}`}>
+                  <li>{original_title}</li>
+                </Link>
+              ))}
+            </ul>
+          )}
+        </>
       </main>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/home" element={<MoviesListTitle />} index={true} />
+          {/* <Route path="/home" element={<div>sdfadfs</div>} /> */}
+        </Route>
+      </Routes>
     </>
   );
 };
 
 // рабочий код
-// import { Routes, Route, Navigate } from 'react-router-dom';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import { Layout } from '../components/layout/Layout';
-// // import { lazy, Suspense } from 'react';
-// import MoviesListTitle from '../pages/MoviesListTitle';
-// // import { Outlet, Link } from 'react-router-dom';
-
 // export const App = () => {
 //   return (
 //     <>
@@ -77,6 +84,8 @@ export const App = () => {
 //     </>
 //   );
 // };
+
+// eample
 // // <Routes>
 // //   <Route path="/" element={<Layout />}>
 // //     <Route path="preview" element={<PreviewPage />} />
