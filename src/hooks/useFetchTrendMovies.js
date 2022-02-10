@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import getTrendMovies from '../services/MoviesApi';
+import { getTrendMovies } from 'services/MoviesApi';
 
-const useFetchTrendMovies = () => {
+export const useFetchTrendMovies = () => {
   const [trendMovies, setTrendMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -26,4 +26,3 @@ const useFetchTrendMovies = () => {
   console.log(trendMovies);
   return { trendMovies, loading, error };
 };
-export default useFetchTrendMovies;

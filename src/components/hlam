@@ -1,0 +1,25 @@
+{
+  /* <Routes>
+  <Route path="/" element={<Layout />}>
+    <Route path="/home" element={<MoviesListTitle />} index={true} /> */
+  /* <Route path="/home" element={<div>sdfadfs</div>} /> */
+  // </Route>
+  // </Routes>;
+  // рабочий код
+  // export const App = () => {
+  //   return (
+  //     <>
+  //       {/* <MoviesListTitle />  */}
+  //       {/* <Suspense fallback={<h1>Loading...</h1>}> */}
+  //       <Routes>
+  //         <Route path="/" element={<Layout />}>
+  //           <Route path="/home" element={<MoviesListTitle />} index={true} />
+  //           {/* <Route path="/home" element={<div>sdfadfs</div>} /> */}
+  //         </Route>
+  //       </Routes>
+  //       {/* </Suspense> */}
+  //     </>
+  //   );
+  // };
+
+}
