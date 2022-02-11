@@ -3,60 +3,44 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Layout } from '../components/layout/Layout';
 // import { lazy, Suspense } from 'react';
-import MoviesListTitle from '../pages/MoviesListTitle';
+import { Home } from 'pages';
+import { MovieCard } from 'pages';
+// import { UseFetchTrendMovies } from 'hooks';
 import SearchMovies from '../components/SearchMovies/SearchMovies';
-import {
-  getTrendMovies,
-  getSearchMovies,
-  getMovieById,
-} from '../services/MoviesApi';
-import useFetchTrendMovies from '../hooks/useFetchTrendMovies';
+// import {
+//   getTrendMovies,
+//   getSearchMovies,
+//   getMovieById,
+// } from '../services/MoviesApi';
+
 import { Outlet, Link } from 'react-router-dom';
 
 export const App = () => {
-  const [trendMovies, setTrendMovies] = useState([]);
-  const [searchMovies, setsearchMovies] = useState([]);
-  const [moviesbyId, setMoviesbyId] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [trendMovies, setTrendMovies] = useState([]);
+  // const [searchMovies, setsearchMovies] = useState([]);
+  // const [moviesbyId, setMoviesbyId] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
 
   // const useFetchTrendMovies = () => {
-  useEffect(() => {
-    if (trendMovies === '') return;
-    async function fetchTrendMovies() {
-      setError(error);
-      setLoading(true);
-      try {
-        const trendMovies = await getTrendMovies();
-        setTrendMovies(trendMovies);
-        console.log(trendMovies);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchTrendMovies();
-  }, []);
-  useEffect(() => {
-    // if (trendMovies === '') return;
-    async function fetchMoviesById() {
-      setError(error);
-      setLoading(true);
-      try {
-        const moviesbyId = await getMovieById();
-        setMoviesbyId(moviesbyId);
-        console.log(moviesbyId);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchMoviesById();
-  }, []);
-  // };
-  // useFetchTrendMovies();
+  // useEffect(() => {
+  //   if (trendMovies === '') return;
+  //   async function fetchTrendMovies() {
+  //     setError(error);
+  //     setLoading(true);
+  //     try {
+  //       const trendMovies = await getTrendMovies();
+  //       setTrendMovies(trendMovies);
+  //       console.log(trendMovies);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchTrendMovies();
+  // }, []);
+
   // const useFetchSearchMovies = () => {
   //   useEffect(() => {
   //     if (searchMovies === '') {
@@ -79,25 +63,21 @@ export const App = () => {
   //   setsearchMovies(searchMovies);
   // };
 
+  //
   return (
     <>
       <main>
-        <h1>Trend movies</h1>
-        {/* <MoviesListTitle trend={useFetchTrendMovies} /> */}
-        {/* <SearchMovies onSearch={handleSearchBar} /> */}
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} index={true} />
+            <Route path="/movies/:movieId" element={<MovieCard />} />
+          </Route>
+          <Route path="/" element={<Layout />}>
+            {/* <Route path="/*" element={<MovieCard />} /> */}
+          </Route>
+        </Routes>
 
-        <>
-          {loading}
-          {!error && (
-            <ul>
-              {trendMovies.map(({ id, original_title }) => (
-                // <Link key={id} to={`/${id}`}>
-                <li key={id}>{original_title}</li>
-                // </Link>
-              ))}
-            </ul>
-          )}
-        </>
+        {/* <SearchMovies onSearch={handleSearchBar} /> */}
       </main>
     </>
   );

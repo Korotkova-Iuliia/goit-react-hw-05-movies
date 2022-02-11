@@ -8,17 +8,18 @@ export const getTrendMovies = async () => {
   return data.results;
 };
 
-console.log(getTrendMovies().then(data => console.log(data.results)));
-
-export const getMovieById = async movieId => {
-  const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}/`);
-  // console.log(data.results);
-  return data.results;
-};
-
+// export const getMovieById = async movieId => {
+//   const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
+//   console.log(data);
+//   console.log(data.overview);
+//   // console.log(movieId);
+//   return data;
+// };
+// getMovieById();
+// console.log(getMovieById().then(data => console.log(data)));
 export const getSearchMovies = async movie => {
   const { data } = await axios.get(
     `/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${movie}`
   );
-  return data.results;
+  return data;
 };

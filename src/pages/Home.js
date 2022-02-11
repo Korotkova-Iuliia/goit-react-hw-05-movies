@@ -1,16 +1,13 @@
-import { useParams, useNavigate, Link } from 'react-router-dom';
-// import useFetchTrendMovies from '../hooks/useFetchTrendMovies';
 import { useEffect, useState } from 'react';
 import { getTrendMovies } from 'services/MoviesApi';
-
-const useFetchTrendMovies = () => {
+import { Outlet, Link } from 'react-router-dom';
+export const Home = () => {
   const [trendMovies, setTrendMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
-    if (trendMovies !== 0) return;
+    // if (trendMovies !== 0) return;
     async function fetchTrendMovies() {
-      setError(error);
       setLoading(true);
       try {
         const trendMovies = await getTrendMovies();
@@ -22,32 +19,40 @@ const useFetchTrendMovies = () => {
         setLoading(false);
       }
     }
-
     fetchTrendMovies();
-  }, [error, trendMovies]);
-  console.log(trendMovies);
-  return { trendMovies, loading, error };
-};
-
-export default useFetchTrendMovies;
-
-export const MoviesListTitle = () => {
-  const { trendMovies, loading, error } = useFetchTrendMovies;
-  console.log(trendMovies);
-
+  }, []);
   return (
-    <main>
+    <>
       <h1>Trend movies</h1>
       {loading}
       {!error && (
         <ul>
           {trendMovies.map(({ id, original_title }) => (
-            <Link key={id} to={`/${id}`}>
-              <li>{original_title}</li>
-            </Link>
+            <li key={id}>
+              <Link to={`movies/${id}`}>{original_title}</Link>
+            </li>
           ))}
         </ul>
       )}
-    </main>
+    </>
   );
 };
+
+// return { trendMovies, loading, error };
+
+//   // return (
+//   //   <>
+//   //     {loading}
+//   //     {!error && (
+//   //       <ul>
+//   //         {trendMovies.map(({ id, original_title }) => (
+//   //
+//   // <Link key={id} to={`/${id}`}>
+//   //   <li>{original_title}</li>
+//   // </Link>;
+//   //         ))}
+//   //       </ul>
+//   //     )}
+//   //   </>
+//   // );
+// };

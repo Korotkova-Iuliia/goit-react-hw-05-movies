@@ -26,7 +26,7 @@ export const Layout = () => {
         <Link to="/home">Home</Link>
         <Link to="/movies">Movies</Link>
       </Nav>
-      {/* <Outlet /> */}
+      <Outlet />
       {/* <Toaster /> */}
     </Wrapper>
   );
