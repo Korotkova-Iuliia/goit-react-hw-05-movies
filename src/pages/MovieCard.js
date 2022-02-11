@@ -17,7 +17,8 @@ export const MovieCard = () => {
       try {
         const movieById = await getMovieById(movieId);
         console.log(movieById);
-        console.log(movieById.title);
+        console.log(movieById.original_title);
+        console.log(movieById.overview);
         setMovieById(movieById);
       } catch (error) {
         console.log(error);
@@ -27,15 +28,19 @@ export const MovieCard = () => {
       }
     }
     fetchMovieById();
+    const { overview, original_title } = movieById;
+    console.log(overview);
   }, [movieId]);
   console.log(movieId);
-  console.log(movieById);
-  //   const { id, original_title } = movieById;
+  console.log(movieById.overview);
+  const { id, original_title } = movieById;
+  const { overview } = movieById;
+  console.log(overview);
   //   console.log(original_title);
   return (
     <>
       <div>kdfjhaslefahelhwelgkh</div>
-      {/* <div>{original_title}</div> */}
+      <div>{original_title}</div>
       {/* <ul>
         {movieById.map(({ id, original_title }) => (
           <li key={id}>
