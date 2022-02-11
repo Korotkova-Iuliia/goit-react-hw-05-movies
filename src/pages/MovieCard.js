@@ -5,13 +5,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { getTrendMovies } from 'services/MoviesApi';
 import { Outlet, Link } from 'react-router-dom';
 
-// const getMovieById = async movieId => {
-//   const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
-//   console.log(data);
-//   console.log(data.overview);
-//   console.log(movieId);
-//   return data;
-// };
 export const MovieCard = () => {
   const { movieId } = useParams();
   const [movieById, setMovieById] = useState(null);
@@ -24,6 +17,7 @@ export const MovieCard = () => {
       try {
         const movieById = await getMovieById(movieId);
         console.log(movieById);
+        console.log(movieById.title);
         setMovieById(movieById);
       } catch (error) {
         console.log(error);
@@ -35,13 +29,13 @@ export const MovieCard = () => {
     fetchMovieById();
   }, [movieId]);
   console.log(movieId);
-  console.log(movieId);
-  const { id, original_title } = movieById;
+  console.log(movieById);
+  //   const { id, original_title } = movieById;
   //   console.log(original_title);
   return (
     <>
       <div>kdfjhaslefahelhwelgkh</div>
-      <div>{original_title}</div>
+      {/* <div>{original_title}</div> */}
       {/* <ul>
         {movieById.map(({ id, original_title }) => (
           <li key={id}>
