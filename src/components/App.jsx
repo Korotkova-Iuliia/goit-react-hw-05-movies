@@ -82,3 +82,12 @@ export const App = () => {
     </>
   );
 };
+//  <Routes>
+//    <Route path="/" element={<Layout />}>
+//      <Route path="/" element={<Home />} index={true} />
+//      <Route path="/movies/:movieId" element={<MovieCard />}>
+//        <Route path="/movies/cast" element={<MovieCard />} />
+//      </Route>
+//    </Route>
+//    {/* <Route path="/*" element={<MovieCard />} /> */}
+//  </Routes>;

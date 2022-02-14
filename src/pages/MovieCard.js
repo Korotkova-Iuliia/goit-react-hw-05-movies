@@ -37,18 +37,32 @@ export const MovieCard = () => {
   //   const { overview } = movieById;
 
   // console.log(original_title);
+
   return (
     <>
       <div>kdfjhaslefahelhwelgkh</div>
       {movieById && (
         <>
-          <div>{movieById.original_title}</div>
           <img
             src={`https://image.tmdb.org/t/p/w500${movieById.poster_path}`}
             alt={movieById.original_title}
           />
+          <div>
+            <h1>{movieById.original_title}</h1>
+            <p>{movieById.original_title}</p>
+            <h2>Overview</h2>
+            <p>{movieById.overview}</p>
+            <h2>Genres</h2>
+            <p>
+              {movieById.genres.map(genre => (
+                <span key={genre.id}>{genre.name}</span>
+              ))}
+            </p>
+            <h2>Cast</h2>
+          </div>
         </>
       )}
+
       {/* <div>{movieById.overview}</div> */}
       {/* <div>{movieById.genres}</div> */}
       {/* <img src={movieById.poster_path} alt="txt" /> */}
@@ -63,3 +77,4 @@ export const MovieCard = () => {
     </>
   );
 };
+const Cast = () => {};
