@@ -29,18 +29,30 @@ export const MovieCard = () => {
     }
     fetchMovieById();
     // const { overview, original_title } = movieById;
-    // console.log(overview);
+    // console.log(movieById.overview);
   }, [movieId]);
   //   console.log(movieId);
-  console.log(movieById);
-  //   const { id, original_title } = movieById;
+  // console.log(movieById);
+  // const { id, original_title } = movieById;
   //   const { overview } = movieById;
-  //   console.log(overview);
-  //   console.log(original_title);
+
+  // console.log(original_title);
   return (
     <>
       <div>kdfjhaslefahelhwelgkh</div>
-      <div>{movieById.original_title}</div>
+      {movieById && (
+        <>
+          <div>{movieById.original_title}</div>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movieById.poster_path}`}
+            alt={movieById.original_title}
+          />
+        </>
+      )}
+      {/* <div>{movieById.overview}</div> */}
+      {/* <div>{movieById.genres}</div> */}
+      {/* <img src={movieById.poster_path} alt="txt" /> */}
+
       {/* <ul>
         {movieById.map(({ id, original_title }) => (
           <li key={id}>
