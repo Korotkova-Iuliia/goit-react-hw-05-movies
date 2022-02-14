@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getMovieById } from 'services';
+import { getMovieById, getMovieCast, getMovieReviews } from 'services';
 import { useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getTrendMovies } from 'services/MoviesApi';
@@ -16,9 +16,6 @@ export const MovieCard = () => {
       //   setLoading(true);
       try {
         const movieById = await getMovieById(movieId);
-        console.log(movieById);
-        console.log(movieById.original_title);
-        console.log(movieById.overview);
         setMovieById(movieById);
       } catch (error) {
         console.log(error);
@@ -28,19 +25,9 @@ export const MovieCard = () => {
       }
     }
     fetchMovieById();
-    // const { overview, original_title } = movieById;
-    // console.log(movieById.overview);
   }, [movieId]);
-  //   console.log(movieId);
-  // console.log(movieById);
-  // const { id, original_title } = movieById;
-  //   const { overview } = movieById;
-
-  // console.log(original_title);
-
   return (
     <>
-      <div>kdfjhaslefahelhwelgkh</div>
       {movieById && (
         <>
           <img
@@ -59,22 +46,100 @@ export const MovieCard = () => {
               ))}
             </p>
             <h2>Cast</h2>
+            <Cast />
+            <h2>Reviews</h2>
+            {/* <Reviews /> */}
           </div>
         </>
       )}
-
-      {/* <div>{movieById.overview}</div> */}
-      {/* <div>{movieById.genres}</div> */}
-      {/* <img src={movieById.poster_path} alt="txt" /> */}
-
-      {/* <ul>
-        {movieById.map(({ id, original_title }) => (
-          <li key={id}>
-            <Link to={`/${id}`}>{original_title}</Link>
-          </li>
-        ))}
-      </ul> */}
     </>
   );
 };
-const Cast = () => {};
+export const Cast = () => {
+  const { movieId } = useParams();
+  const [movieById, setMovieById] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    // if (trendMovies !== 0) return;
+    async function fetchMovieCast() {
+      //   setLoading(true);
+      try {
+        const movieById = await getMovieCast(movieId);
+        setMovieById(movieById);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      } finally {
+        // setLoading(false);
+      }
+    }
+    fetchMovieCast();
+  }, [movieId]);
+  return (
+    <>
+      <div>
+        <ul>
+          {movieById &&
+            movieById.cast.map(name => (
+              <li key={name.id}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${name.profile_path}`}
+                  alt={name.original_name}
+                />
+                <p>{name.original_name}</p>
+              </li>
+            ))}
+        </ul>
+        {/* {movieById.data.cast.map(name => (
+          <span key={name.cast.cast_id}>{name.cast.original_name}</span>
+        ))} */}
+      </div>
+    </>
+  );
+};
+// export const Reviews = () => {
+//   const { movieId } = useParams();
+//   const [movieById, setMovieById] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+//   useEffect(() => {
+//     // if (trendMovies !== 0) return;
+//     async function fetchMovieReviews() {
+//       try {
+//         const movieById = await getMovieReviews(movieId);
+//         setMovieById(movieById);
+//       } catch (error) {
+//         console.log(error);
+//         setError(error);
+//       } finally {
+//       }
+//     }
+//     fetchMovieReviews();
+//   }, [movieId]);
+//   return (
+//     <>
+//       <div>
+//         {/* {movieById.data.cast.map(name => (
+//           <span key={name.cast.cast_id}>{name.cast.original_name}</span>
+//         ))} */}
+//       </div>
+//     </>
+//   );
+// };
+// {
+//   movieById && (
+//     <>
+//       <div>Card</div>
+//       {/* <p>
+//             {movieById.data.cast.map(name => (
+//               <span key={name.cast.cast_id}>{name.cast.original_name}</span>
+//             ))}
+//           </p> */}
+//       {/* <img
+//             src={`https://image.tmdb.org/t/p/w500${movieById.poster_path}`}
+//             alt={movieById.original_title}
+//           /> */}
+//     </>
+//   );
+// }
