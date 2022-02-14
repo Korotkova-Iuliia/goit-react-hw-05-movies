@@ -3,27 +3,26 @@
 // import { useParams } from 'react-router-dom';
 
 // export const useFetchMovieById = () => {
-//   const [movieById, setMovieById] = useState([]);
+//   const { movieId } = useParams();
+//   const [movieById, setMovieById] = useState(null);
 //   const [loading, setLoading] = useState(false);
 //   const [error, setError] = useState(null);
-//   const { movieId } = useParams;
 //   useEffect(() => {
 //     // if (trendMovies !== 0) return;
-//     async function fetchMovieById() {
-//       setLoading(true);
+//     async function fetchMovieById(movieId) {
+//       //   setLoading(true);
 //       try {
 //         const movieById = await getMovieById(movieId);
 //         setMovieById(movieById);
-//         console.log(movieById);
 //       } catch (error) {
+//         console.log(error);
 //         setError(error);
 //       } finally {
-//         setLoading(false);
+//         // setLoading(false);
 //       }
 //     }
-
 //     fetchMovieById();
 //   }, [movieId]);
 
-//   return { movieById, loading, error };
+//   return { movieId, movieById, loading, error };
 // };

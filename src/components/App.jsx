@@ -1,10 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Layout } from '../components/layout/Layout';
+import { Layout, LayoutFeatureMovie } from '../components/layout/Layout';
 // import { lazy, Suspense } from 'react';
-import { Home } from 'pages';
-import { MovieCard } from 'pages';
+import { Home, MovieCard, Cast, Reviews } from 'pages';
 // import { UseFetchTrendMovies } from 'hooks';
 import SearchMovies from '../components/SearchMovies/SearchMovies';
 // import {
@@ -70,10 +69,10 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} index={true} />
-            <Route path="/movies/:movieId" element={<MovieCard />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            {/* <Route path="/*" element={<MovieCard />} /> */}
+            <Route path="/movies/:movieId" element={<MovieCard />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
           </Route>
         </Routes>
 
@@ -82,6 +81,9 @@ export const App = () => {
     </>
   );
 };
+//  <Route path="/" element={<Layout />}>
+//    {/* <Route path="/*" element={<MovieCard />} /> */}
+//  </Route>;
 //  <Routes>
 //    <Route path="/" element={<Layout />}>
 //      <Route path="/" element={<Home />} index={true} />

@@ -31,3 +31,26 @@ export const Layout = () => {
     </Wrapper>
   );
 };
+export const LayoutFeatureMovie = () => {
+  return (
+    <Wrapper>
+      <Nav>
+        <Link to="cast">
+          <h2>Cast</h2>
+        </Link>
+        <Link to="reviews">
+          <h2>Reviews</h2>
+        </Link>
+      </Nav>
+      <Outlet />
+      {/* <Toaster /> */}
+    </Wrapper>
+  );
+};
+//  <Link to={`cast`}>
+
+//             <Cast />
+//           </Link>
+//           <NavLink to={`reviews`}>
+
+//           </NavLink>

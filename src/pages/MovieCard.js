@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getMovieById, getMovieCast, getMovieReviews } from 'services';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getTrendMovies } from 'services/MoviesApi';
 import { Outlet, Link } from 'react-router-dom';
+import { Layout, LayoutFeatureMovie } from '../components/layout/Layout';
 
 export const MovieCard = () => {
   const { movieId } = useParams();
@@ -45,10 +46,9 @@ export const MovieCard = () => {
                 <span key={genre.id}>{genre.name}</span>
               ))}
             </p>
-            <h2>Cast</h2>
-            <Cast />
-            <h2>Reviews</h2>
-            {/* <Reviews /> */}
+          </div>
+          <div>
+            <LayoutFeatureMovie />
           </div>
         </>
       )}
@@ -63,7 +63,7 @@ export const Cast = () => {
   useEffect(() => {
     // if (trendMovies !== 0) return;
     async function fetchMovieCast() {
-      //   setLoading(true);
+      setLoading(true);
       try {
         const movieById = await getMovieCast(movieId);
         setMovieById(movieById);
@@ -71,7 +71,7 @@ export const Cast = () => {
         console.log(error);
         setError(error);
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     }
     fetchMovieCast();
@@ -83,10 +83,12 @@ export const Cast = () => {
           {movieById &&
             movieById.cast.map(name => (
               <li key={name.id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${name.profile_path}`}
-                  alt={name.original_name}
-                />
+                {name.profile_path && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${name.profile_path}`}
+                    alt={name.original_name}
+                  />
+                )}
                 <p>{name.original_name}</p>
               </li>
             ))}
@@ -98,48 +100,36 @@ export const Cast = () => {
     </>
   );
 };
-// export const Reviews = () => {
-//   const { movieId } = useParams();
-//   const [movieById, setMovieById] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   useEffect(() => {
-//     // if (trendMovies !== 0) return;
-//     async function fetchMovieReviews() {
-//       try {
-//         const movieById = await getMovieReviews(movieId);
-//         setMovieById(movieById);
-//       } catch (error) {
-//         console.log(error);
-//         setError(error);
-//       } finally {
-//       }
-//     }
-//     fetchMovieReviews();
-//   }, [movieId]);
-//   return (
-//     <>
-//       <div>
-//         {/* {movieById.data.cast.map(name => (
-//           <span key={name.cast.cast_id}>{name.cast.original_name}</span>
-//         ))} */}
-//       </div>
-//     </>
-//   );
-// };
-// {
-//   movieById && (
-//     <>
-//       <div>Card</div>
-//       {/* <p>
-//             {movieById.data.cast.map(name => (
-//               <span key={name.cast.cast_id}>{name.cast.original_name}</span>
-//             ))}
-//           </p> */}
-//       {/* <img
-//             src={`https://image.tmdb.org/t/p/w500${movieById.poster_path}`}
-//             alt={movieById.original_title}
-//           /> */}
-//     </>
-//   );
-// }
+export const Reviews = () => {
+  const { movieId } = useParams();
+  const [reviews, setMovieReviews] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    // if (trendMovies !== 0) return;
+    async function fetchMovieReviews() {
+      try {
+        const reviews = await getMovieReviews(movieId);
+        setMovieReviews(reviews);
+        // console.log(reviews);
+        // console.log(reviews.author_details);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      } finally {
+      }
+    }
+    fetchMovieReviews();
+  }, [movieId]);
+  return (
+    <ul>
+      {reviews &&
+        reviews.map(review => (
+          <li key={review.id}>
+            <p> {review.author_details.username}</p>
+            <p>{review.content}</p>
+          </li>
+        ))}
+    </ul>
+  );
+};

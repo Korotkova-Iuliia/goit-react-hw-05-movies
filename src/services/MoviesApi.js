@@ -10,7 +10,7 @@ export const getTrendMovies = async () => {
 
 export const getMovieById = async movieId => {
   const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
-  console.log(data);
+  // console.log(data);
   // console.log(data.overview);
   // console.log(movieId);
   return data;
@@ -25,17 +25,27 @@ export const getMovieCast = async movieId => {
   console.log(data.cast[0].profile_path);
   return data;
 };
-// export const getMovieReviews = async movieId => {
-//   const data = await axios.get(`/movie/${movieId}/reviews?api_key=${API_KEY}`);
+// export const getMovieReviews = async () => {
+//   const { data } = await axios.get(`/movie/476669/reviews?api_key=${API_KEY}`);
 //   console.log(data);
-//   // console.log(data.results);
+//   console.log(data.results);
 
 //   return data.results;
 // };
 
+export const getMovieReviews = async movieId => {
+  const { data } = await axios.get(
+    `/movie/${movieId}/reviews?api_key=${API_KEY}`
+  );
+  console.log(data);
+  console.log(data.results);
+
+  return data.results;
+};
+// getMovieReviews();
 export const getSearchMovies = async movie => {
   const { data } = await axios.get(
-    `/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${movie}`
+    `/search/movie?api_key=${API_KEY}&language=en-US&query=${movie}`
   );
   return data;
 };
