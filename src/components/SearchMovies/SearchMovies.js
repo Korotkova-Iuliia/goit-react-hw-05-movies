@@ -2,37 +2,42 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
+
 import {
   SurchBarWrapper,
   SearchForm,
   SearchFormButton,
   SearchFormButtonLabel,
   SearchFormInput,
+  Icon,
 } from './SearchMovies.styled.js';
-function SearchMovies({ onSearch }) {
-  const [searchMovies, setsearchMovies] = useState('');
+export function SearchMovies({ onSearch }) {
+  const [movieName, setMovieName] = useState('');
   const handleInputName = e => {
-    setsearchMovies(e.currentTarget.value.toLowerCase());
+    setMovieName(e.currentTarget.value.toLowerCase());
+    console.log(e.currentTarget.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    if (searchMovies.trim() === '') {
-      return console.log('поисковая строка пуста!');
-      // return toast.warn('поисковая строка пуста!');
-    }
-    onSearch(searchMovies);
-    setsearchMovies('');
+    // if (searchMovies.trim() === '') {
+    //   return console.log('поисковая строка пуста!');
+    //   // return toast.warn('поисковая строка пуста!');
+    // }
+    console.log(movieName);
+    onSearch(movieName);
+    setMovieName('');
   };
   return (
     <SurchBarWrapper>
       <SearchForm onSubmit={handleSubmit}>
         <SearchFormButton type="submit">
           <SearchFormButtonLabel></SearchFormButtonLabel>
+          <Icon name="search" fill="gray" width="30px" height="30px" />
         </SearchFormButton>
         <SearchFormInput
           type="text"
           autoComplete="off"
-          value={SearchMovies}
+          value={movieName}
           autoFocus
           onChange={handleInputName}
           placeholder="Search films"
@@ -41,7 +46,7 @@ function SearchMovies({ onSearch }) {
     </SurchBarWrapper>
   );
 }
-export default SearchMovies;
+
 // SearchMovies.propTypes = {
 //   onSubmit: PropTypes.func,
 //   onChange: PropTypes.func,
