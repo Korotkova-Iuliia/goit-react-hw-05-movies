@@ -6,11 +6,6 @@ import { Layout, LayoutFeatureMovie } from '../components/layout/Layout';
 import { Home, MovieCard, Cast, Reviews, SearchMoviesPage } from 'pages';
 // import { UseFetchTrendMovies } from 'hooks';
 import { SearchMovies } from '../components/SearchMovies/SearchMovies';
-// import {
-//   getTrendMovies,
-//   getSearchMovies,
-//   getMovieById,
-// } from '../services/MoviesApi';
 
 import { Outlet, Link } from 'react-router-dom';
 
@@ -26,23 +21,23 @@ export const App = () => {
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
+            <Route path="/*" element={<Navigate />} />
           </Route>
         </Routes>
-
-        {/* <SearchMovies onSearch={handleSearchBar} /> */}
       </main>
     </>
   );
 };
-//  <Route path="/" element={<Layout />}>
-//    {/* <Route path="/*" element={<MovieCard />} /> */}
-//  </Route>;
-//  <Routes>
-//    <Route path="/" element={<Layout />}>
-//      <Route path="/" element={<Home />} index={true} />
-//      <Route path="/movies/:movieId" element={<MovieCard />}>
-//        <Route path="/movies/cast" element={<MovieCard />} />
-//      </Route>
-//    </Route>
-//    {/* <Route path="/*" element={<MovieCard />} /> */}
-//  </Routes>;
+// <Routes>
+//   <Route path="/" element={<Layout />}>
+//     <Route element={<Home />} index={true} />
+//     <Route path="movies" element={<SearchMoviesPage />}>
+//       <Route path=":movieId" element={<MovieCard />}>
+//         <Route path="cast" element={<Cast />} />
+//         <Route path="reviews" element={<Reviews />} />
+//       </Route>
+//     </Route>
+//   </Route>
+
+//   <Route path="/*" element={<Navigate />} />
+// </Routes>;

@@ -1,26 +1,8 @@
-import { useEffect, useState } from 'react';
-import { getTrendMovies } from 'services/MoviesApi';
-import { Outlet, Link } from 'react-router-dom';
+import { useFetchTrendMovies } from 'hooks/useFetchTrendMovies';
+import { NavLink } from 'react-router-dom';
+import Button from '../components/Button/Button';
 export const Home = () => {
-  const [trendMovies, setTrendMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    // if (trendMovies !== 0) return;
-    async function fetchTrendMovies() {
-      setLoading(true);
-      try {
-        const trendMovies = await getTrendMovies();
-        setTrendMovies(trendMovies);
-        console.log(trendMovies);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchTrendMovies();
-  }, []);
+  const { trendMovies, handleLoadMore, loading, error } = useFetchTrendMovies();
   return (
     <>
       <h1>Trend movies</h1>
@@ -29,30 +11,14 @@ export const Home = () => {
         <ul>
           {trendMovies.map(({ id, original_title }) => (
             <li key={id}>
-              <Link to={`movies/${id}`}>{original_title}</Link>
+              <NavLink to={`movies/${id}`}>{original_title}</NavLink>
             </li>
           ))}
         </ul>
       )}
+      {trendMovies.length > 0 && (
+        <Button type="button" loadMore={handleLoadMore} />
+      )}
     </>
   );
 };
-
-// return { trendMovies, loading, error };
-
-//   // return (
-//   //   <>
-//   //     {loading}
-//   //     {!error && (
-//   //       <ul>
-//   //         {trendMovies.map(({ id, original_title }) => (
-//   //
-//   // <Link key={id} to={`/${id}`}>
-//   //   <li>{original_title}</li>
-//   // </Link>;
-//   //         ))}
-//   //       </ul>
-//   //     )}
-//   //   </>
-//   // );
-// };

@@ -2,8 +2,10 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const API_KEY = 'e815f38922cafca80c1f07403a692f09';
 
-export const getTrendMovies = async () => {
-  const { data } = await axios.get(`/trending/movie/day?api_key=${API_KEY}`);
+export const getTrendMovies = async page => {
+  const { data } = await axios.get(
+    `/trending/movie/day?api_key=${API_KEY}&page=${page}`
+  );
   // console.log(data.results);
   return data.results;
 };
@@ -25,24 +27,14 @@ export const getMovieCast = async movieId => {
   console.log(data.cast[0].profile_path);
   return data;
 };
-// export const getMovieReviews = async () => {
-//   const { data } = await axios.get(`/movie/476669/reviews?api_key=${API_KEY}`);
-//   console.log(data);
-//   console.log(data.results);
-
-//   return data.results;
-// };
 
 export const getMovieReviews = async movieId => {
   const { data } = await axios.get(
     `/movie/${movieId}/reviews?api_key=${API_KEY}`
   );
-  console.log(data);
-  console.log(data.results);
-
   return data.results;
 };
-// getMovieReviews();
+
 export const getSearchMovies = async (movie, page) => {
   const { data } = await axios.get(
     `/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&query=${movie}`
