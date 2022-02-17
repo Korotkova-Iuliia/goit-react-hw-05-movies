@@ -21,7 +21,7 @@ const Title = styled.h2`
 `;
 export const Layout = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   return (
     <>
       <GlobalStyle />

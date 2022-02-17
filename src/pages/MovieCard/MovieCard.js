@@ -3,11 +3,11 @@ import { LayoutFeatureMovie } from '../../components/layout/Layout';
 import { Card, Description } from './MovieCard.styled';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillCaretLeftFill } from 'react-icons/bs';
+import noPoster from '../../images/noPoster.jpg';
 export const MovieCard = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const { movieById, error } = useFetchMovieById();
-  // location?.state?.from ?? '/';
   return (
     <>
       <Link to={location?.state?.from ?? '/'}>Go Back</Link>
@@ -18,7 +18,11 @@ export const MovieCard = () => {
       {!error && movieById && (
         <Card>
           <img
-            src={`https://image.tmdb.org/t/p/w500${movieById.poster_path}`}
+            src={
+              movieById.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movieById.poster_path}`
+                : noPoster
+            }
             alt={movieById.original_title}
           />
           <Description>

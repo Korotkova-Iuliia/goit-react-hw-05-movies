@@ -31,6 +31,7 @@ export const App = () => {
             </Route>
           </Routes>
         </Suspense>
+        ;
       </main>
     </>
   );
@@ -47,3 +48,17 @@ export const App = () => {
 //   </Route>
 //   <Route path="/*" element={<Navigate />} />
 // </Routes>;
+// ........................
+//  <Suspense fallback={<Loader />}>
+//    <Routes>
+//      <Route path="/" element={<Layout />}>
+//        <Route path="/" element={<Home />} index={true} />
+//        <Route path="movies" element={<SearchMoviesPage />} />
+//        <Route path="movies/:movieId" element={<MovieCard />}>
+//          <Route path="cast" element={<Cast />} />
+//          <Route path="reviews" element={<Reviews />} />
+//        </Route>
+//        <Route path="*" element={<Navigate to="/" />} />
+//      </Route>
+//    </Routes>
+//  </Suspense>;

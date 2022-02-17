@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import { TrendList } from '../Home/Home.styled';
 export const SearchMoviesPage = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const { listMovies, error, handleSearchMovies, handleLoadMore } =
     useFetchSearchMovies();
   return (
@@ -15,7 +15,6 @@ export const SearchMoviesPage = () => {
         <TrendList>
           {listMovies.map(({ id, original_title }) => (
             <li key={id}>
-              {/* <Link to={`${id}`}> */}
               <Link to={`${id}`} state={{ from: location }}>
                 {original_title}
               </Link>

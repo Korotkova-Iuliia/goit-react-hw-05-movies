@@ -26,20 +26,19 @@ export function SearchMovies({ onSearch }) {
   // console.log(location);
   useEffect(() => {
     if (query) {
-      console.log('Dfsegsze');
+      // console.log('Dfsegsze');
       setMovieName(query);
     }
   }, [query]);
   const handleInputName = e => {
     setMovieName(e.currentTarget.value.toLowerCase());
-    console.log(movieName);
+    // console.log(movieName);
   };
   const handleSubmit = e => {
     e.preventDefault();
-
-    // setMovieName(query);
-    console.log(movieName);
-    console.log(query);
+    setMovieName(query);
+    // console.log(movieName);
+    // console.log(query);
     if (movieName.trim() === '') {
       return toast.error('поисковая строка пуста!');
     }

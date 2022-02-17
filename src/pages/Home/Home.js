@@ -5,7 +5,7 @@ import { TrendList, TrendTitle } from './Home.styled';
 export const Home = () => {
   const { trendMovies, handleLoadMore, loading, error } = useFetchTrendMovies();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   return (
     <>
       <TrendTitle>Trend movies</TrendTitle>

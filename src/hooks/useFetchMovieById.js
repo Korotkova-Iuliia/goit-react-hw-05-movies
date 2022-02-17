@@ -7,6 +7,7 @@ export const useFetchMovieById = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
+    console.log('useFetch MOVIE BY ID');
     async function fetchMovieById() {
       setLoading(true);
       try {
