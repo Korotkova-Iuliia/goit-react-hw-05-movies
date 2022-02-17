@@ -15,8 +15,8 @@ export const SearchMoviesPage = () => {
         <TrendList>
           {listMovies.map(({ id, original_title }) => (
             <li key={id}>
-              <Link to={`${id}`}>
-                {/* <Link to={`${id}`} state={{ from: location }}> */}
+              {/* <Link to={`${id}`}> */}
+              <Link to={`${id}`} state={{ from: location }}>
                 {original_title}
               </Link>
             </li>

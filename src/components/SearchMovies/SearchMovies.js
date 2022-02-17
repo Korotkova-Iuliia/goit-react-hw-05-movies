@@ -19,32 +19,35 @@ import {
 //   };
 
 export function SearchMovies({ onSearch }) {
-  const location = useLocation();
+  // const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [movieName, setMovieName] = useState('');
   const query = searchParams.get('query');
-  console.log(query);
-  console.log(location);
+  // console.log(location);
   useEffect(() => {
-    if (query) console.log('Dfsegsze');
-    // setMovieName(query);
+    if (query) {
+      console.log('Dfsegsze');
+      setMovieName(query);
+    }
   }, [query]);
   const handleInputName = e => {
     setMovieName(e.currentTarget.value.toLowerCase());
-    console.log(e.currentTarget.value);
+    console.log(movieName);
   };
   const handleSubmit = e => {
     e.preventDefault();
 
+    // setMovieName(query);
+    console.log(movieName);
+    console.log(query);
     if (movieName.trim() === '') {
       return toast.error('поисковая строка пуста!');
     }
     // setSearchParams({ query: e.currentTarget.elements.query.value });
-    setSearchParams({ query: movieName });
-
-    console.log(movieName);
+    setSearchParams({ query: e.currentTarget.elements.query.value });
+    // setSearchParams({ query: movieName });
     onSearch(movieName);
-
+    // query ? onSearch(query) : onSearch(movieName);s
     setMovieName('');
   };
   return (
