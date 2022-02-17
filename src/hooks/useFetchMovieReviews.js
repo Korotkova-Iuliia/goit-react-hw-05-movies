@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getMovieReviews } from 'services';
 import { useParams } from 'react-router-dom';
-import { Layout, LayoutFeatureMovie } from '../components/layout/Layout';
-
 export const useFetchMovieReviews = () => {
   const { movieId } = useParams();
   const [reviews, setMovieReviews] = useState(null);
@@ -10,6 +8,7 @@ export const useFetchMovieReviews = () => {
   const [error, setError] = useState(null);
   useEffect(() => {
     async function fetchMovieReviews() {
+      setLoading(true);
       try {
         const reviews = await getMovieReviews(movieId);
         setMovieReviews(reviews);
@@ -17,6 +16,7 @@ export const useFetchMovieReviews = () => {
         console.log(error);
         setError(error);
       } finally {
+        setLoading(false);
       }
     }
     fetchMovieReviews();

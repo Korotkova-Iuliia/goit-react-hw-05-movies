@@ -1,31 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { getSearchMovies } from 'services';
-import { SearchMovies } from '../components/SearchMovies';
-import Button from '../components/Button/Button';
 export const useFetchSearchMovies = () => {
   const [listMovies, setListMovies] = useState([]);
   const [nameMovies, setNameMovies] = useState('');
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
     if (nameMovies === '') {
       return;
     }
+
     async function fetchSearchMovies() {
-      setLoading(true);
       try {
         const results = await getSearchMovies(nameMovies, page);
-        console.log(listMovies);
-        console.log(results);
-
+        if (results.length === 0) {
+          toast.error('Cannot find your request!');
+        }
         setListMovies(listMovies => [...listMovies, ...results]);
-        setLoading(false);
       } catch (error) {
         setError(error);
       } finally {
-        setLoading(false);
       }
     }
     fetchSearchMovies();
@@ -35,6 +30,7 @@ export const useFetchSearchMovies = () => {
   };
   const handleSearchMovies = searchMovies => {
     setNameMovies(searchMovies);
+    setListMovies([]);
   };
-  return { listMovies, loading, error, handleSearchMovies, handleLoadMore };
+  return { listMovies, error, handleSearchMovies, handleLoadMore };
 };

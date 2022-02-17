@@ -1,56 +1,57 @@
 import styled from 'styled-components';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { GlobalStyle } from '../GlobalStyle';
-// import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 const Nav = styled.nav`
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
 `;
-
 const Link = styled(NavLink)`
+  color: gray;
   &.active {
     color: tomato;
   }
 `;
-
 const Wrapper = styled.div`
-  padding: 12px;
+  padding: 40px;
 `;
-
+const Title = styled.h2`
+  font-size: 20px;
+`;
 export const Layout = () => {
+  const location = useLocation();
+  console.log(location);
   return (
-    <Wrapper>
-      {/* <GlobalStyle /> */}
-      <Nav>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-      </Nav>
-      <Outlet />
-      {/* <Toaster /> */}
-    </Wrapper>
+    <>
+      <GlobalStyle />
+      <Wrapper>
+        <Nav>
+          <Link to="/" state={{ from: location }}>
+            <Title>Home</Title>
+          </Link>
+          <Link to="/movies" state={{ from: location }}>
+            <Title>Movies</Title>
+          </Link>
+          <Toaster />
+        </Nav>
+        <Outlet />
+      </Wrapper>
+    </>
   );
 };
 export const LayoutFeatureMovie = () => {
   return (
-    <Wrapper>
+    <>
       <Nav>
         <Link to="cast">
-          <h2>Cast</h2>
+          <Title>Cast</Title>
         </Link>
         <Link to="reviews">
-          <h2>Reviews</h2>
+          <Title>Reviews</Title>
         </Link>
       </Nav>
       <Outlet />
-      {/* <Toaster /> */}
-    </Wrapper>
+    </>
   );
 };
-//  <Link to={`cast`}>
-
-//             <Cast />
-//           </Link>
-//           <NavLink to={`reviews`}>
-
-//           </NavLink>

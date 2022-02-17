@@ -1,20 +1,25 @@
 import { useFetchTrendMovies } from 'hooks/useFetchTrendMovies';
-import { NavLink } from 'react-router-dom';
-import Button from '../components/Button/Button';
+import { NavLink, useLocation } from 'react-router-dom';
+import Button from '../../components/Button/Button';
+import { TrendList, TrendTitle } from './Home.styled';
 export const Home = () => {
   const { trendMovies, handleLoadMore, loading, error } = useFetchTrendMovies();
+  const location = useLocation();
+  console.log(location);
   return (
     <>
-      <h1>Trend movies</h1>
+      <TrendTitle>Trend movies</TrendTitle>
       {loading}
       {!error && (
-        <ul>
+        <TrendList>
           {trendMovies.map(({ id, original_title }) => (
             <li key={id}>
-              <NavLink to={`movies/${id}`}>{original_title}</NavLink>
+              <NavLink to={`movies/${id}`} state={{ from: location }}>
+                {original_title}
+              </NavLink>
             </li>
           ))}
-        </ul>
+        </TrendList>
       )}
       {trendMovies.length > 0 && (
         <Button type="button" loadMore={handleLoadMore} />
