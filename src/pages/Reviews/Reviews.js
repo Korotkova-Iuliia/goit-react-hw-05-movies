@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import { useFetchMovieReviews } from 'hooks';
 export const Reviews = () => {
-  const { reviews, loading, error } = useFetchMovieReviews();
+  const { reviews, error } = useFetchMovieReviews();
   return (
     <ul>
-      {loading}
       {!error &&
         reviews &&
         reviews.map(review => (
@@ -23,12 +22,3 @@ Reviews.propTypes = {
     content: PropTypes.string,
   }),
 };
-// ImageGalleryItem.propTypes = {
-//   dataImage: PropTypes.shape({
-//     previewURL: PropTypes.string,
-//     largeImageURL: PropTypes.string,
-//     tags: PropTypes.string,
-//     showModal: PropTypes.string,
-//   }),
-//   onSelectImages: PropTypes.func,
-// };

@@ -10,6 +10,13 @@ export const Card = styled.div`
 export const Description = styled.div`
   padding: 40px;
 `;
-// export const NavLink = styled.Link`
-//   padding-left: 10px;
-// `;
+export const SecondTitle = styled.h2`
+  color: gray;
+`;
+export const Genres = styled.p`
+  padding-left: 4px;
+`;
+export const VoteAverage = styled.p`
+  display: flex;
+  padding-left: 4px;
+`;

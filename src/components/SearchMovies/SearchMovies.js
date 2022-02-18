@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
 import {
@@ -10,23 +10,12 @@ import {
   SearchFormInput,
   Icon,
 } from './SearchMovies.styled.js';
-//
-// export function SearchMovies({ onSearch }) {
-//   const [movieName, setMovieName] = useSearchParams('');
-//   const handleInputName = e => {
-//     setMovieName({ query: e.currentTarget.query.value.toLowerCase() });
-//     console.log(e.currentTarget.value);
-//   };
-
 export function SearchMovies({ onSearch }) {
-  // const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [movieName, setMovieName] = useState('');
   const query = searchParams.get('query');
-  // console.log(location);
   useEffect(() => {
     if (query) {
-      // console.log('Dfsegsze');
       setMovieName(query);
     }
   }, [query]);

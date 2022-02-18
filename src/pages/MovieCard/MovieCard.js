@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { useFetchMovieById } from 'hooks';
 import { LayoutFeatureMovie } from '../../components/layout/Layout';
-import { Card, Description, NavLink } from './MovieCard.styled';
+import { Card, Description, VoteAverage } from './MovieCard.styled';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillCaretLeftFill, BsFillStarFill } from 'react-icons/bs';
 import noPoster from '../../images/noPoster.jpg';
 export const MovieCard = () => {
   const location = useLocation();
-  // console.log(location);
   const { movieById, error } = useFetchMovieById();
   console.log(movieById);
   return (
@@ -28,10 +27,12 @@ export const MovieCard = () => {
           />
           <Description>
             <h1>{movieById.original_title}</h1>
-            <p>
-              <BsFillStarFill />
+            <VoteAverage>
+              <span>
+                <BsFillStarFill />
+              </span>
               {movieById.vote_average}
-            </p>
+            </VoteAverage>
             <h2>Overview</h2>
             <p>{movieById.overview}</p>
             <h2>Genres</h2>
