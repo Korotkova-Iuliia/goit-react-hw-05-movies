@@ -8,6 +8,8 @@ export const Card = styled.div`
   background-color: #c4c4c4;
 `;
 export const Description = styled.div`
-  margin-left: 40px;
   padding: 40px;
 `;
+// export const NavLink = styled.Link`
+//   padding-left: 10px;
+// `;

@@ -1,20 +1,21 @@
+import PropTypes from 'prop-types';
 import { useFetchMovieById } from 'hooks';
 import { LayoutFeatureMovie } from '../../components/layout/Layout';
-import { Card, Description } from './MovieCard.styled';
+import { Card, Description, NavLink } from './MovieCard.styled';
 import { Link, useLocation } from 'react-router-dom';
-import { BsFillCaretLeftFill } from 'react-icons/bs';
+import { BsFillCaretLeftFill, BsFillStarFill } from 'react-icons/bs';
 import noPoster from '../../images/noPoster.jpg';
 export const MovieCard = () => {
   const location = useLocation();
   // console.log(location);
   const { movieById, error } = useFetchMovieById();
+  console.log(movieById);
   return (
     <>
-      <Link to={location?.state?.from ?? '/'}>Go Back</Link>
-      {/* <Link to="/">
+      <Link to={location?.state?.from ?? '/'}>
         <BsFillCaretLeftFill />
-        To List
-      </Link> */}
+        Go Back
+      </Link>
       {!error && movieById && (
         <Card>
           <img
@@ -27,7 +28,10 @@ export const MovieCard = () => {
           />
           <Description>
             <h1>{movieById.original_title}</h1>
-            <p>{movieById.vote_average}</p>
+            <p>
+              <BsFillStarFill />
+              {movieById.vote_average}
+            </p>
             <h2>Overview</h2>
             <p>{movieById.overview}</p>
             <h2>Genres</h2>
@@ -44,4 +48,17 @@ export const MovieCard = () => {
       </div>
     </>
   );
+};
+MovieCard.propTypes = {
+  movieById: PropTypes.objectOf({
+    id: PropTypes.number,
+    poster_path: PropTypes.string,
+    original_title: PropTypes.string,
+    overview: PropTypes.string,
+    vote_average: PropTypes.string,
+    genres: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+  }),
 };

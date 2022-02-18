@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import { useFetchMovieCast } from 'hooks/useFetchMovieCast';
-import { CastList, CastItem, BackgroundImg } from './Cast.styled';
+import { CastList, CastItem } from './Cast.styled';
 import inconito from '../../images/inconito.jpg';
 export const Cast = () => {
   const { movieById, error } = useFetchMovieCast();
@@ -7,21 +8,30 @@ export const Cast = () => {
     <CastList>
       {!error &&
         movieById &&
-        movieById.cast.map(name => (
-          <CastItem key={name.id}>
+        movieById.cast.map(({ id, profile_path, original_name }) => (
+          <CastItem key={id}>
             {
               <img
                 src={
-                  name.profile_path
-                    ? `https://image.tmdb.org/t/p/w200${name.profile_path}`
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w200${profile_path}`
                     : inconito
                 }
-                alt={name.original_name}
+                alt={original_name}
               />
             }
-            <p>{name.original_name}</p>
+            <p>{original_name}</p>
           </CastItem>
         ))}
     </CastList>
   );
+};
+Cast.propTypes = {
+  movieById: PropTypes.arrayOf({
+    cast: PropTypes.arrayOf({
+      id: PropTypes.number,
+      profile_path: PropTypes.string,
+      original_name: PropTypes.string,
+    }),
+  }),
 };

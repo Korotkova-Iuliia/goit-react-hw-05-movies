@@ -46,7 +46,7 @@ export function SearchMovies({ onSearch }) {
     setSearchParams({ query: e.currentTarget.elements.query.value });
     // setSearchParams({ query: movieName });
     onSearch(movieName);
-    // query ? onSearch(query) : onSearch(movieName);s
+    // query ? onSearch(query) : onSearch(movieName);
     setMovieName('');
   };
   return (
@@ -69,9 +69,7 @@ export function SearchMovies({ onSearch }) {
     </SurchBarWrapper>
   );
 }
-
-// SearchMovies.propTypes = {
-//   onSubmit: PropTypes.func,
-//   onChange: PropTypes.func,
-// };
-//
+SearchMovies.propTypes = {
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+};
