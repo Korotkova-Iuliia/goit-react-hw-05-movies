@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { SearchMovies } from '../../components/SearchMovies';
+import { SearchMovies } from '../../components/SearchMovies/SearchMovies';
 import { useFetchSearchMovies } from 'hooks/useFetchSearchMovies';
 import Button from '../../components/Button/Button';
 import { TrendList } from '../Home/Home.styled';
