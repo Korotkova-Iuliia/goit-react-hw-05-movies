@@ -1,26 +1,34 @@
 import styled from 'styled-components';
+
 export const ButtonLoad = styled.button`
-  padding: 8px 16px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 2px;
-  background-color: gray;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: center;
-  display: inline-block;
-  color: #fff;
-  border: 0;
-  text-decoration: none;
+  display: block;
+  margin: 40px auto;
+  padding: 12px 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 18px;
-  line-height: 24px;
-  font-style: normal;
-  font-weight: 500;
-  min-width: 180px;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  :hover {
-    background-color: #c4c4c4;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+    box-shadow: 0 6px 18px rgba(29, 78, 216, 0.35);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.2);
+  }
+
+  &:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 `;
