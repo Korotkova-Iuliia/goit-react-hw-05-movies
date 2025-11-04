@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useFetchMovieReviews } from 'hooks';
-export const Reviews = () => {
+const Reviews = () => {
   const { reviews, error } = useFetchMovieReviews();
   return (
     <ul>
@@ -15,6 +15,9 @@ export const Reviews = () => {
     </ul>
   );
 };
+
+export default Reviews;
+
 Reviews.propTypes = {
   reviews: PropTypes.arrayOf({
     id: PropTypes.number,

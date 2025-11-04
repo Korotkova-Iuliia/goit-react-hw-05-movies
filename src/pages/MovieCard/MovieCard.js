@@ -5,7 +5,8 @@ import { Card, Description, VoteAverage } from './MovieCard.styled';
 import { Link, useLocation } from 'react-router-dom';
 import { BsFillCaretLeftFill, BsFillStarFill } from 'react-icons/bs';
 import noPoster from '../../images/noPoster.jpg';
-export const MovieCard = () => {
+
+const MovieCard = () => {
   const location = useLocation();
   const { movieById, error } = useFetchMovieById();
   console.log(movieById);
@@ -50,6 +51,8 @@ export const MovieCard = () => {
     </>
   );
 };
+export default MovieCard;
+
 MovieCard.propTypes = {
   movieById: PropTypes.objectOf({
     id: PropTypes.number,

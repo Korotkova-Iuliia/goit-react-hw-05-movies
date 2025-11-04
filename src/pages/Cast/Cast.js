@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import { useFetchMovieCast } from 'hooks/useFetchMovieCast';
 import { CastList, CastItem } from './Cast.styled';
 import inconito from '../../images/inconito.jpg';
-export const Cast = () => {
+const Cast = () => {
   const { movieById, error } = useFetchMovieCast();
+  console.log(movieById);
+  console.log(error);
   return (
     <CastList>
       {!error &&
@@ -26,12 +28,16 @@ export const Cast = () => {
     </CastList>
   );
 };
+export default Cast;
+
 Cast.propTypes = {
-  movieById: PropTypes.arrayOf({
-    cast: PropTypes.arrayOf({
-      id: PropTypes.number,
-      profile_path: PropTypes.string,
-      original_name: PropTypes.string,
-    }),
+  movieById: PropTypes.shape({
+    cast: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        profile_path: PropTypes.string,
+        original_name: PropTypes.string.isRequired,
+      })
+    ),
   }),
 };

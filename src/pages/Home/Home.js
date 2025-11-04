@@ -12,7 +12,7 @@ import {
   ErrorMsg,
 } from './Home.styled';
 
-export const Home = () => {
+const Home = () => {
   const { trendMovies, handleLoadMore, loading, error } = useFetchTrendMovies();
   const location = useLocation();
 
@@ -49,7 +49,7 @@ export const Home = () => {
     </>
   );
 };
-
+export default Home;
 // trendMovies - ous hook
 // Home.propTypes = {
 //   trendMovies: PropTypes.objectOf({

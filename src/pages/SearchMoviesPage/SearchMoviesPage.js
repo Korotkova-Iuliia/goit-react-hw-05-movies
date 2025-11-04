@@ -4,7 +4,7 @@ import { SearchMovies } from '../../components/SearchMovies/SearchMovies';
 import { useFetchSearchMovies } from 'hooks/useFetchSearchMovies';
 import Button from '../../components/Button/Button';
 import { TrendList } from '../Home/Home.styled';
-export const SearchMoviesPage = () => {
+const SearchMoviesPage = () => {
   const location = useLocation();
   const { listMovies, error, handleSearchMovies, handleLoadMore } =
     useFetchSearchMovies();
@@ -29,9 +29,13 @@ export const SearchMoviesPage = () => {
     </>
   );
 };
+export default SearchMoviesPage;
+
 SearchMoviesPage.propTypes = {
-  listMovies: PropTypes.object({
-    id: PropTypes.number,
-    original_title: PropTypes.string,
-  }),
+  listMovies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_title: PropTypes.string.isRequired,
+    })
+  ),
 };
