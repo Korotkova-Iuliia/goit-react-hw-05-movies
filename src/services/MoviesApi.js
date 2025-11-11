@@ -1,9 +1,11 @@
 import axios from 'axios';
+
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
 axios.defaults.baseURL = process.env.REACT_APP_TMDB_BASE_URL;
 // REACT_APP_TMDB_BASE_URL=https://api.themoviedb.org/3
-
+console.log('BASE_URL:', process.env.REACT_APP_TMDB_BASE_URL);
+console.log('API_KEY:', process.env.REACT_APP_TMDB_KEY);
 // --------------- Get Trend Movies --------------
 export const getTrendMovies = async (page = 1) => {
   try {
