@@ -3,19 +3,43 @@ import { useFetchMovieById } from 'hooks';
 import { LayoutFeatureMovie } from '../../components/layout/Layout';
 import { Card, Description, VoteAverage } from './MovieCard.styled';
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { BsFillCaretLeftFill, BsFillStarFill } from 'react-icons/bs';
 import noPoster from '../../images/noPoster.jpg';
 
 const MovieCard = () => {
   const location = useLocation();
+
+  const backLink = location.state?.from
+    ? `${location.state.from.pathname}${location.state.from.search || ''}`
+    : '/';
   const { movieById, error } = useFetchMovieById();
   console.log(movieById);
+  useEffect(() => {
+    if (location.state?.from?.scrollY) {
+      window.scrollTo(0, location.state.from.scrollY);
+    }
+  }, [location.state]);
   return (
     <>
-      <Link to={location?.state?.from ?? '/'}>
+      <Link
+        to={backLink}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          textDecoration: 'none',
+          color: '#333',
+          fontWeight: '500',
+          marginBottom: '20px',
+        }}
+      >
+        <BsFillCaretLeftFill /> Go Back
+      </Link>
+      {/* <Link to={location?.state?.from ?? '/'}>
         <BsFillCaretLeftFill />
         Go Back
-      </Link>
+      </Link> */}
       {!error && movieById && (
         <Card>
           <img

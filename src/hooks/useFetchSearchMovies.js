@@ -1,40 +1,70 @@
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useState, useEffect, useRef } from 'react';
 import { getSearchMovies } from 'services';
+import toast from 'react-hot-toast';
 import scrollBy from '../components/ScrollBy';
+
 export const useFetchSearchMovies = () => {
-  const [listMovies, setListMovies] = useState([]);
-  const [nameMovies, setNameMovies] = useState('');
-  const [page, setPage] = useState(1);
+  const [listMovies, setListMovies] = useState(() => {
+    const saved = sessionStorage.getItem('searchMovies');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const [nameMovies, setNameMovies] = useState(() => {
+    return sessionStorage.getItem('searchQuery') || '';
+  });
+
+  const [page, setPage] = useState(() => {
+    return Number(sessionStorage.getItem('searchPage')) || 1;
+  });
+
   const [error, setError] = useState(null);
+  const isRestored = useRef(!!listMovies.length); // отметка, что кэш уже есть
+
   useEffect(() => {
-    console.log('useFetch SearchMovies');
-    if (nameMovies === '') {
+    if (!nameMovies) return;
+
+    // если данные уже восстановлены из sessionStorage, не запрашиваем заново
+    if (isRestored.current) {
+      isRestored.current = false;
       return;
     }
-    async function fetchSearchMovies() {
+
+    const fetchSearchMovies = async () => {
       try {
         const results = await getSearchMovies(nameMovies, page);
+
         if (results.length === 0) {
           toast.error('Cannot find your request!');
+          return;
         }
-        setListMovies(listMovies => [...listMovies, ...results]);
-      } catch (error) {
-        setError(error);
-      } finally {
-        if (page !== 1) {
-          scrollBy();
-        }
+
+        setListMovies(prev => {
+          const newList = page === 1 ? results : [...prev, ...results];
+          sessionStorage.setItem('searchMovies', JSON.stringify(newList));
+          sessionStorage.setItem('searchQuery', nameMovies);
+          sessionStorage.setItem('searchPage', String(page));
+          return newList;
+        });
+
+        if (page > 1) scrollBy();
+      } catch (err) {
+        setError(err);
       }
-    }
+    };
+
     fetchSearchMovies();
   }, [nameMovies, page]);
-  const handleLoadMore = () => {
-    setPage(page => page + 1);
-  };
+
   const handleSearchMovies = searchMovies => {
+    if (searchMovies === nameMovies) return;
     setNameMovies(searchMovies);
     setListMovies([]);
+    setPage(1);
   };
+
+  const handleLoadMore = () => {
+    setPage(prev => prev + 1);
+  };
+
   return { listMovies, error, handleSearchMovies, handleLoadMore };
 };
