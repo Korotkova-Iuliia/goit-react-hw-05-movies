@@ -8,26 +8,28 @@ https://korotkova-iuliia.github.io/goit-react-hw-05-movies/
 
 🛠️ Tech Stacka
 
-React
-React Router
-Styled Components
-Axios
-TMDB REST API
-Environment variables (.env)
-Custom React hooks (useFetchMovieById, useFetchCast, etc.)
+React,
+React Router,
+Styled Components,
+Axios,
+TMDB REST API,
+Environment variables (.env),
+Custom React hooks (useFetchMovieById, useFetchCast, etc.),
 
 ✨ Features
-Browse trending movies
-Search movies by title
+
+Browse trending movies,
+Search movies by title,
 
 Movie details page: 
-overview 
-poster
-release date
-rating 
+overview,
+poste,
+release date,
+rating ,
 
 Additional movie information:
-Cast
+Cast,
 Reviews
+
 Smooth navigation with return-to-previous-page support
 Partially responsive layout
