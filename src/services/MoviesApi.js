@@ -9,6 +9,7 @@ console.log('API_KEY:', process.env.REACT_APP_TMDB_KEY);
 // --------------- Get Trend Movies --------------
 export const getTrendMovies = async (page = 1) => {
   try {
+    console.log('axios baseURL:', axios.defaults.baseURL);
     const { data } = await axios.get(
       `/trending/movie/week?api_key=${API_KEY}&page=${page}`
     );
@@ -22,6 +23,7 @@ export const getTrendMovies = async (page = 1) => {
 // ----------- Get movie by Id  ---------------------------
 export const getMovieById = async movieId => {
   try {
+    console.log('axios baseURL:', axios.defaults.baseURL);
     const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
     console.log('MovieById fetched');
     return data;
@@ -33,6 +35,7 @@ export const getMovieById = async movieId => {
 // ----------- Get movie cast  ---------------------------
 export const getMovieCast = async movieId => {
   try {
+    console.log('axios baseURL:', axios.defaults.baseURL);
     const { data } = await axios.get(
       `/movie/${movieId}/credits?api_key=${API_KEY}`
     );
@@ -46,6 +49,7 @@ export const getMovieCast = async movieId => {
 // ----------- Get movie reviews  ---------------------------
 export const getMovieReviews = async movieId => {
   try {
+    console.log('axios baseURL:', axios.defaults.baseURL);
     const { data } = await axios.get(
       `/movie/${movieId}/reviews?api_key=${API_KEY}`
     );
@@ -59,6 +63,7 @@ export const getMovieReviews = async movieId => {
 // ------------ Get search movies -------------------------
 export const getSearchMovies = async (movie, page = 1) => {
   try {
+    console.log('axios baseURL:', axios.defaults.baseURL);
     const { data } = await axios.get(
       `/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&query=${movie}`
     );
